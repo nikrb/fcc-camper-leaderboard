@@ -14,6 +14,9 @@ class App extends Component {
       this.setState( { data: res});
     });
   };
+  handleSort = ( column_label, sort_direction) => {
+    console.log( `sort label[${column_label}] dir[${sort_direction}]`);
+  };
   render = () => {
     const img = {
       maxWidth: "32px",
@@ -41,8 +44,10 @@ class App extends Component {
           <div className="table-row header">
             <div className="num_small">#</div>
             <div className="text">User</div>
-            <div className="num">Recent</div>
-            <div className="num">All Time</div>
+            <SortableColumn columnClass="num" columnLabel="Recent"
+              handleSort={this.handleSort} />
+            <SortableColumn columnClass="num" columnLabel="All Time"
+              handleSort={this.handleSort} />
           </div>
           {rows}
         </div>
