@@ -13,24 +13,13 @@ export default class SortableColumn extends React.Component {
     this.props.handleSort( this.props.columnLabel, nsd);
   };
   render = () => {
-    let dir_symbol = "";
-    switch( this.state.sort_direction){
-      case -1:
-        dir_symbol = String.fromCharCode( "9660");
-        break;
-      case 1:
-        dir_symbol = String.fromCharCode( "9650");
-        break;
-      default:
-        break;
-    }
     const pointer = {
       cursor: "pointer"
     };
     return (
       <div className={this.props.columnClass} style={pointer}
         onClick={this.handleClick}>
-        {this.props.columnLabel}{dir_symbol}
+        {this.props.columnLabel}{this.props.dirSymbol}
       </div>
     );
   };

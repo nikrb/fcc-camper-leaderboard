@@ -1,6 +1,6 @@
 
-export const getData = () => {
-  return fetch( "https://fcctop100.herokuapp.com/api/fccusers/top/recent", {
+export const getData = ( endpoint) => {
+  return fetch( `https://fcctop100.herokuapp.com/api/fccusers/top/${endpoint}`, {
     method: 'get',
     headers: {
       'Accept': 'application/json',
