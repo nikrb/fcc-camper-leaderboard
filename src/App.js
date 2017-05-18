@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {getData} from './FccActions';
+import SortableColumn from './SortableColumn';
 import './App.css';
 
 class App extends Component {
@@ -15,18 +16,19 @@ class App extends Component {
   };
   render = () => {
     const img = {
-      maxWidth: "32px"
+      maxWidth: "32px",
+      marginRight: "10px"
     };
     const rows = this.state.data.map( ( row, ndx) => {
       return (
         <div className="table-row" key={ndx}>
-            <div className="num">{ndx+1}</div>
-            <div className="text" title={row.username}>
-              <img style={img} src={row.img} alt="n/a" />
-              {row.username}
-            </div>
-            <div className="num">{row.recent}</div>
-            <div className="num">{row.alltime}</div>
+          <div className="num_small">{ndx+1}</div>
+          <div className="text" title={row.username}>
+            <img style={img} src={row.img} alt="n/a" />
+            {row.username}
+          </div>
+          <div className="num">{row.recent}</div>
+          <div className="num">{row.alltime}</div>
         </div>
       );
     });
@@ -37,7 +39,7 @@ class App extends Component {
         </div>
         <div className="container-fluid" style={{marginTop: "10px"}}>
           <div className="table-row header">
-            <div className="num">#</div>
+            <div className="num_small">#</div>
             <div className="text">User</div>
             <div className="num">Recent</div>
             <div className="num">All Time</div>
