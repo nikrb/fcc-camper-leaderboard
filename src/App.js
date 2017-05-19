@@ -13,7 +13,16 @@ class App extends Component {
   };
   componentWillMount = () => {
     getData( "recent").then( ( res) => {
-      this.setState( { data: res});
+      this.setState( { data: this.addIds( res)});
+    });
+  };
+
+  // add an id rather than use the loop index, or id nos stay 1..n after sort
+  // TODO: because we have some recent values that are the same, the id's come out
+  // scrambled for recent (but not alltime). we could sort by the id's?
+  addIds = ( data) => {
+    return data.map( (item, ndx) => {
+      return {...item, id: ndx+1};
     });
   };
   handleSort = ( column_label, sort_direction) => {
@@ -25,18 +34,20 @@ class App extends Component {
     } else {
       this.setState( { recent_dir_symbol:"", alltime_dir_symbol: dir_symbol});
     }
+    // endpoint for url, same name used in data structure
     let ep = "recent";
     if( column_label === "All Time") ep = "alltime";
     getData( ep)
     .then( (res) => {
+      let ret = this.addIds( res);
       if( sort_direction === -1){
-        res.sort( ( a, b) => {
+        ret.sort( ( a, b) => {
           if( a[ep] < b[ep]) return -1;
           if( a[ep] > b[ep]) return 1;
           return 0;
         });
       }
-      return res;
+      return ret;
     })
     .then( (res) => {
       this.setState( {data: res});
@@ -50,7 +61,7 @@ class App extends Component {
     const rows = this.state.data.map( ( row, ndx) => {
       return (
         <div className="table-row" key={ndx}>
-          <div className="num_small">{ndx+1}</div>
+          <div className="num_small">{row.id}</div>
           <div className="text" title={row.username}>
             <img style={img} src={row.img} alt="n/a" />
             {row.username}
