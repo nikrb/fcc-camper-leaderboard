@@ -7,8 +7,7 @@ export const getData = ( endpoint) => {
       'Content-Type': 'application/json'
     }
   }).then( checkStatus)
-  .then( parseJSON)
-  .then( function( response){ return response});
+  .then( parseJSON);
 };
 
 
