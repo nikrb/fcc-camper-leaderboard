@@ -1,5 +1,5 @@
 export default {
-  container_fluid : {
+  table : {
     boxSizing: "border-box",
     paddingLeft: "15px",
     paddingRight: "15px",

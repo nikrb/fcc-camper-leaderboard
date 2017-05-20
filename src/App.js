@@ -21,8 +21,8 @@ export default class App extends React.Component {
       fontWeight:"bold"
     };
     return (
-      <div className="App">
-        <div className="App-header">
+      <div>
+        <div style={app_header}>
           <span style={header1}>FreeCodeCamp LeaderBoard</span>
           <span style={small_italic} >
             <a href="https://hashnode.com/post/really-responsive-tables-using-css3-flexbox-cijzbxd8n00pwvm53sl4l42cx"

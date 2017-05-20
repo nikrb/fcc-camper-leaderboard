@@ -81,7 +81,7 @@ export default class CamperLeaderboard extends React.Component {
       );
     });
     return (
-      <div style={{...styles.container_fluid, marginTop: "10px"}}>
+      <div style={{...styles.table, marginTop: "10px"}}>
         <div style={{...styles.table_row, ...styles.table_row_header}}>
           <div style={styles.num_small}>#</div>
           <div style={styles.textimg}>User</div>
