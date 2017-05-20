@@ -14,9 +14,10 @@ export default class SortableColumn extends React.Component {
     const pointer = {
       cursor: "pointer"
     };
+    this.sort_direction = this.props.sort_direction;
     let dir_symbol = "";
-    if( this.props.sort_direction === 1) dir_symbol = String.fromCharCode( "9660");
-    if( this.props.sort_direction === -1) dir_symbol = String.fromCharCode( "9650");
+    if( this.sort_direction === 1) dir_symbol = String.fromCharCode( "9660");
+    if( this.sort_direction === -1) dir_symbol = String.fromCharCode( "9650");
     return (
       <div className={this.props.columnClass} style={pointer}
         onClick={this.handleClick}>
