@@ -83,7 +83,8 @@ class App extends Component {
         <div className="App-header">
           <span style={header1}>FreeCodeCamp LeaderBoard</span>
           <span style={small_italic} >
-            <a href="https://hashnode.com/post/really-responsive-tables-using-css3-flexbox-cijzbxd8n00pwvm53sl4l42cx" target="_blank">
+            <a href="https://hashnode.com/post/really-responsive-tables-using-css3-flexbox-cijzbxd8n00pwvm53sl4l42cx"
+              target="_blank">
               really responsive tables
             </a>
           </span>
