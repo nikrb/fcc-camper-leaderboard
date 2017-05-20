@@ -8,8 +8,8 @@ class App extends Component {
     columns: [{label: "#", sortby: true}, {label: "Name", sortby: false},
      {label: "30", sortby: false}, {label: "All", sortby: false}],
     data: [],
-    recent_dir_symbol: "",
-    alltime_dir_symbol: ""
+    recent_sort_direction: 0,
+    alltime_sort_direction: 0
   };
   componentWillMount = () => {
     getData( "recent").then( ( res) => {
@@ -27,12 +27,10 @@ class App extends Component {
   };
   handleSort = ( column_label, sort_direction) => {
     console.log( `sort label[${column_label}] dir[${sort_direction}]`);
-    let dir_symbol = String.fromCharCode( "9660");
-    if( sort_direction === -1) dir_symbol = String.fromCharCode( "9650");
     if( column_label === "Recent"){
-      this.setState( { recent_dir_symbol: dir_symbol, alltime_dir_symbol: ""});
+      this.setState( { recent_sort_direction: sort_direction, alltime_sort_direction: 0});
     } else {
-      this.setState( { recent_dir_symbol:"", alltime_dir_symbol: dir_symbol});
+      this.setState( { recent_sort_direction:0, alltime_sort_direction: sort_direction});
     }
     // endpoint for url, same name used in data structure
     let ep = "recent";
@@ -95,9 +93,9 @@ class App extends Component {
             <div className="num_small">#</div>
             <div className="text">User</div>
             <SortableColumn columnClass="num" columnLabel="Recent"
-              handleSort={this.handleSort} dirSymbol={this.state.recent_dir_symbol} />
+              handleSort={this.handleSort} sort_direction={this.state.recent_sort_direction} />
             <SortableColumn columnClass="num" columnLabel="All Time"
-              handleSort={this.handleSort} dirSymbol={this.state.alltime_dir_symbol}/>
+              handleSort={this.handleSort} sort_direction={this.state.alltime_sort_direction}/>
           </div>
           {rows}
         </div>

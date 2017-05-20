@@ -1,25 +1,26 @@
 import React from 'react';
 
 export default class SortableColumn extends React.Component {
-  state = {
-    sort_direction: 0 // -1 0 +1
-  };
+  sort_direction = 0
   handleClick = (e) => {
     let nsd = 1;
-    if( this.state.sort_direction === 1){
+    if( this.sort_direction === 1){
       nsd = -1;
     }
-    this.setState( { sort_direction: nsd});
+    this.sort_direction = nsd;
     this.props.handleSort( this.props.columnLabel, nsd);
   };
   render = () => {
     const pointer = {
       cursor: "pointer"
     };
+    let dir_symbol = "";
+    if( this.props.sort_direction === 1) dir_symbol = String.fromCharCode( "9660");
+    if( this.props.sort_direction === -1) dir_symbol = String.fromCharCode( "9650");
     return (
       <div className={this.props.columnClass} style={pointer}
         onClick={this.handleClick}>
-        {this.props.columnLabel}{this.props.dirSymbol}
+        {this.props.columnLabel}{dir_symbol}
       </div>
     );
   };
