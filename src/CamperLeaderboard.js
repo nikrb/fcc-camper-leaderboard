@@ -51,17 +51,6 @@ export default class CamperLeaderboard extends React.Component {
       this.setState( {data: res});
     });
   };
-  // TODO: hmmmm ...
-  columns = [
-    { name: "id", label: "#", sort_handler: 0, style: styles.num_small },
-    { name: "user", label: "User", sort_handler: 0, style: styles.textimg},
-    { name: "recent", label:"Recent", style: styles.num,
-      sort_handler: this.handleSort,
-      sort_direction: this.state.recent_sort_direction},
-    { name: "alltime", label:"All Time2", style: styles.num,
-      sort_handler: this.handleSort,
-      sort_direction: this.state.alltime_sort_direction}
-  ];
   render = () => {
     const img = {
       maxWidth: "32px",
