@@ -1,48 +1,67 @@
 import React from 'react';
 import {getData} from './FccActions';
-import {Table, TableHeader, SortableColumn, TableStyles as styles} from '../Table';
+import {Table, TableHeader, SortableColumn, TableStyles as styles, Pager} from '../Table';
 
 export default class CamperLeaderboard extends React.Component {
   state = {
     data: [],
     recent_sort_direction: 0,
-    alltime_sort_direction: 0
+    alltime_sort_direction: 0,
+    start: 0,
+    count: 10
   };
+  total_rows = 0;
   componentWillMount = () => {
-    getData( "recent").then( ( res) => {
-      this.setState( { data: this.addIds( res)});
+    this.fetchData( "recent", 0, this.state.count, "", 0).then( ( res) => {
+      console.log( "initial data load:", res);
+      this.setState( { data: res});
     });
   };
 
-  // add an id rather than use the loop index, or id nos stay 1..n after sort
-  // TODO: because we have some recent values that are the same, the id's come out
-  // scrambled for recent (but not alltime). we could sort by the id's?
-  addIds = ( data) => {
-    return data.map( (item, ndx) => {
-      return {...item, id: ndx+1};
+  fetchData = ( endpoint, start, count, sort_column, sort_direction) => {
+    return getData( endpoint, start, count, sort_column, sort_direction)
+    .then( (res) => {
+      console.log( "sorted column data response:", res);
+      // FIXME: bad practice to mutate here?
+      this.total_rows = res.total_rows;
+      return res.data;
     });
   };
   handleSort = ( column_label, sort_direction) => {
+    // ok so yes the sort_column is the same as the endpoint, but we don't always
+    // want to sort me thinx
+    let sort_column = "";
     if( column_label === "Recent"){
+      sort_column = "recent";
       this.setState( { recent_sort_direction: sort_direction, alltime_sort_direction: 0});
     } else {
+      sort_column = "alltime";
       this.setState( { recent_sort_direction:0, alltime_sort_direction: sort_direction});
     }
     // endpoint for url, same name used in data structure
     let ep = "recent";
     if( column_label === "All Time") ep = "alltime";
-    getData( ep)
+    this.fetchData( ep, this.state.start, this.state.count, sort_column, sort_direction)
     .then( (res) => {
-      let ret = this.addIds( res);
-      if( sort_direction === -1){
-        ret.sort( ( a, b) => {
-          if( a[ep] < b[ep]) return -1;
-          if( a[ep] > b[ep]) return 1;
-          return 0;
-        });
-      }
-      return ret;
-    })
+      this.setState( {data: res});
+    });
+  };
+  handlePageSelected = ( page_no) => {
+    const new_start = page_no * this.state.count;
+    this.setState( { start: new_start});
+    let sort_column = "";
+    let sort_direction = 0;
+    // check for an active sort
+    if( this.state.recent_sort_direction){
+      sort_column = "recent";
+      sort_direction = this.state.recent_sort_direction;
+    } else if( this.state.alltime_sort_direction) {
+      sort_column = "alltime";
+      sort_direction = this.state.alltime_sort_direction;
+    }
+    let ep = "recent";
+    if( this.state.alltime_sort_direction) ep = "alltime";
+    this.fetchData( ep, new_start, this.state.count, sort_column, sort_direction)
     .then( (res) => {
       this.setState( {data: res});
     });
@@ -86,18 +105,27 @@ export default class CamperLeaderboard extends React.Component {
         </div>
       );
     });
+    const wrapper = {
+      // display: "flex",
+      // flexDirection: "column",
+      // flex: "1 0 100%"
+    };
     return (
-      <Table style={{marginTop: "10px"}} >
-        <TableHeader>
-          <div style={num_small}>#</div>
-          <div style={textimg}>User</div>
-          <SortableColumn style={num} columnLabel="Recent"
-            handleSort={this.handleSort} sort_direction={this.state.recent_sort_direction} />
-          <SortableColumn style={num} columnLabel="All Time"
-            handleSort={this.handleSort} sort_direction={this.state.alltime_sort_direction}/>
-        </TableHeader>
-        {rows}
-      </Table>
+      <div style={wrapper}>
+        <Table style={{marginTop: "10px"}} >
+          <TableHeader>
+            <div style={num_small}>#</div>
+            <div style={textimg}>User</div>
+            <SortableColumn style={num} columnLabel="Recent"
+              handleSort={this.handleSort} sort_direction={this.state.recent_sort_direction} />
+            <SortableColumn style={num} columnLabel="All Time"
+              handleSort={this.handleSort} sort_direction={this.state.alltime_sort_direction}/>
+          </TableHeader>
+          {rows}
+        </Table>
+        <Pager handlePageSelect={this.handlePageSelected}
+          total_rows={this.total_rows} display_count={this.state.count} />
+      </div>
     );
   };
 }
