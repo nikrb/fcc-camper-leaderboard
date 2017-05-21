@@ -24,12 +24,16 @@ export default class Pager extends React.Component {
         new_page_no += 1;
         break;
       case 'last_page':
-        new_page_no = this.total_pages;
+        new_page_no = this.total_pages-1;
         break;
       default:
+        new_page_no = parseInt( e.target.value, 10);
         break;
     }
-    // this.props.pageClicked( current_page_no);
+    this.setState( {current_page_no: new_page_no}, () => {
+      console.log( "set current_page_no:", this.state.current_page_no);
+      this.props.handlePageSelect( new_page_no);
+    });
   };
   render = () => {
     const wrapper = {
@@ -42,11 +46,14 @@ export default class Pager extends React.Component {
       borderRadius: "10px"
     };
     const { total_rows, display_count} = this.props;
-    this.total_pages = total_rows / display_count +1;
+    console.log( `pager current_page_no [${this.state.current_page_no}]`);
+    // FIXME: check edges
+    this.total_pages = total_rows / display_count;
 
     const numbered_page_buttons = Array.from({length: this.total_pages}, (v, i) => {
       return (
-        <button key={i} type="button" style={btn} onClick={this.handleClick} value={i} >
+        <button key={i} type="button" style={btn} onClick={this.handleClick}
+          disabled={this.state.current_page_no === i}  value={i} >
           {i+1}
         </button>
       );
@@ -55,11 +62,23 @@ export default class Pager extends React.Component {
     const right_arrow = String.fromCharCode( 9654);
     return (
       <div style={wrapper}>
-        <button type="button" style={btn} onClick={this.handleClick}  value='first_page' >{left_arrow+left_arrow}</button>
-        <button type="button" style={btn} onClick={this.handleClick}  value='prev_page' >{left_arrow}</button>
+        <button type="button" style={btn} onClick={this.handleClick}
+          value='first_page' disabled={this.state.current_page_no === 0} >
+            {left_arrow+left_arrow}
+        </button>
+        <button type="button" style={btn} onClick={this.handleClick}
+          value='prev_page' disabled={this.state.current_page_no === 0} >
+            {left_arrow}
+        </button>
         {numbered_page_buttons}
-        <button type="button" style={btn} onClick={this.handleClick}  value='next_page' >{right_arrow}</button>
-        <button type="button" style={btn} onClick={this.handleClick}  value='last_page' >{right_arrow}{right_arrow}</button>
+        <button type="button" style={btn} onClick={this.handleClick}
+          value='next_page' disabled={this.state.current_page_no === this.total_pages} >
+            {right_arrow}
+        </button>
+        <button type="button" style={btn} onClick={this.handleClick}
+          value='last_page' disabled={this.state.current_page_no === this.total_pages} >
+            {right_arrow}{right_arrow}
+        </button>
       </div>
     );
   };

@@ -13,7 +13,6 @@ export default class CamperLeaderboard extends React.Component {
   total_rows = 0;
   componentWillMount = () => {
     this.fetchData( "recent", 0, this.state.count, "", 0).then( ( res) => {
-      console.log( "initial data load:", res);
       this.setState( { data: res});
     });
   };
@@ -48,7 +47,6 @@ export default class CamperLeaderboard extends React.Component {
   };
   handlePageSelected = ( page_no) => {
     const new_start = page_no * this.state.count;
-    this.setState( { start: new_start});
     let sort_column = "";
     let sort_direction = 0;
     // check for an active sort
@@ -63,7 +61,7 @@ export default class CamperLeaderboard extends React.Component {
     if( this.state.alltime_sort_direction) ep = "alltime";
     this.fetchData( ep, new_start, this.state.count, sort_column, sort_direction)
     .then( (res) => {
-      this.setState( {data: res});
+      this.setState( {data: res, start: new_start});
     });
   };
   render = () => {
