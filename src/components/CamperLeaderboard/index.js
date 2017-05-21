@@ -64,6 +64,13 @@ export default class CamperLeaderboard extends React.Component {
     });
   };
   render = () => {
+    const wrapper = {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      // FIXME: shouldn't this make the wrapper width 100%
+      // flex: "1 0 100%"
+    };
     const img = {
       maxWidth: "32px",
       marginRight: "10px"
@@ -102,13 +109,6 @@ export default class CamperLeaderboard extends React.Component {
         </div>
       );
     });
-    const wrapper = {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      // FIXME: shouldn't this make the wrapper width 100%
-      // flex: "1 0 100%"
-    };
     return (
       <div style={wrapper}>
         <PagedTable handlePageSelect={this.handlePageSelected}
