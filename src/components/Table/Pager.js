@@ -48,7 +48,7 @@ export default class Pager extends React.Component {
     const { total_rows, display_count} = this.props;
     console.log( `pager current_page_no [${this.state.current_page_no}]`);
     // FIXME: check edges
-    this.total_pages = total_rows / display_count;
+    this.total_pages = Math.ceil( total_rows / display_count);
 
     const numbered_page_buttons = Array.from({length: this.total_pages}, (v, i) => {
       return (
@@ -72,11 +72,11 @@ export default class Pager extends React.Component {
         </button>
         {numbered_page_buttons}
         <button type="button" style={btn} onClick={this.handleClick}
-          value='next_page' disabled={this.state.current_page_no === this.total_pages} >
+          value='next_page' disabled={this.state.current_page_no === this.total_pages-1} >
             {right_arrow}
         </button>
         <button type="button" style={btn} onClick={this.handleClick}
-          value='last_page' disabled={this.state.current_page_no === this.total_pages} >
+          value='last_page' disabled={this.state.current_page_no === this.total_pages-1} >
             {right_arrow}{right_arrow}
         </button>
       </div>
