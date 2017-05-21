@@ -103,8 +103,10 @@ export default class CamperLeaderboard extends React.Component {
       );
     });
     const wrapper = {
-      // display: "flex",
-      // flexDirection: "column",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      // FIXME: shouldn't this make the wrapper width 100%
       // flex: "1 0 100%"
     };
     return (

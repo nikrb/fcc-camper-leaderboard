@@ -9,9 +9,10 @@ export default {
   table_row : {
     display: "flex",
     flexDirection: "row",
-    flexGrow: "0",
+    // flexGrow: "0",
     flexWrap: "wrap",
-    width: "calc( 100% - 35px)",
+    // width: "100%",
+    flex: "1 0 100%",
     paddingLeft: "15px",
     paddingRight: "15px",
     borderBottom: "2px solid #e0e0e0",
