@@ -1,5 +1,5 @@
 import React from 'react';
-import CamperLeaderboard from './CamperLeaderboard';
+import CamperLeaderboard from './components/CamperLeaderboard';
 
 export default class App extends React.Component {
   render = () => {

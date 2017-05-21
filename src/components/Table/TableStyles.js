@@ -24,26 +24,5 @@ export default {
     paddingTop: "8px",
     paddingBottom: "8px",
     userSelect: "none"
-  },
-  num_small : {
-    display: "flex",
-    justifyContent: "flex-start",
-    flexGrow: "0",
-    width: "2em",
-    marginRight: "20px",
-  },
-  textimg : {
-    display: "flex", /* or align-items doesn't work */
-    alignItems: "center",
-    flexGrow: "2",
-    overflow: "hidden",
-    whiteSpace: "nowrap",
-    textOverflow: "ellipsis",
-    paddingRight: "10px",
-    width: "180px"
-  },
-  num : {
-    textAlign: "center",
-    width: "80px"
   }
 };

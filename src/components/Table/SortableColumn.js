@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default class SortableColumn extends React.Component {
-  sort_direction = 0
+  sort_direction = 0;
   handleClick = (e) => {
     let nsd = -1;
     if( this.sort_direction === -1){
