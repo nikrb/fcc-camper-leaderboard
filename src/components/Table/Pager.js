@@ -31,7 +31,6 @@ export default class Pager extends React.Component {
         break;
     }
     this.setState( {current_page_no: new_page_no}, () => {
-      console.log( "set current_page_no:", this.state.current_page_no);
       this.props.handlePageSelect( new_page_no);
     });
   };

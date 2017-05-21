@@ -20,7 +20,6 @@ export default class CamperLeaderboard extends React.Component {
   fetchData = ( endpoint, start, count, sort_column, sort_direction) => {
     return getData( endpoint, start, count, sort_column, sort_direction)
     .then( (res) => {
-      console.log( "sorted column data response:", res);
       // FIXME: bad practice to mutate here?
       this.total_rows = res.total_rows;
       return res.data;
