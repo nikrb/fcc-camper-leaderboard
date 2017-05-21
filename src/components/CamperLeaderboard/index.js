@@ -1,6 +1,6 @@
 import React from 'react';
 import {getData} from './FccActions';
-import {Table, TableHeader, SortableColumn, TableStyles as styles, Pager} from '../Table';
+import {Table, TableHeader, SortableColumn, TableStyles as styles, PagedTable} from '../Table';
 
 export default class CamperLeaderboard extends React.Component {
   state = {
@@ -111,19 +111,20 @@ export default class CamperLeaderboard extends React.Component {
     };
     return (
       <div style={wrapper}>
-        <Table style={{marginTop: "10px"}} >
-          <TableHeader>
-            <div style={num_small}>#</div>
-            <div style={textimg}>User</div>
-            <SortableColumn style={num} columnLabel="Recent"
-              handleSort={this.handleSort} sort_direction={this.state.recent_sort_direction} />
-            <SortableColumn style={num} columnLabel="All Time"
-              handleSort={this.handleSort} sort_direction={this.state.alltime_sort_direction}/>
-          </TableHeader>
-          {rows}
-        </Table>
-        <Pager handlePageSelect={this.handlePageSelected}
-          total_rows={this.total_rows} display_count={this.state.count} />
+        <PagedTable handlePageSelect={this.handlePageSelected}
+          total_rows={this.total_rows} display_count={this.state.count} >
+          <Table style={{marginTop: "10px"}} >
+            <TableHeader>
+              <div style={num_small}>#</div>
+              <div style={textimg}>User</div>
+              <SortableColumn style={num} columnLabel="Recent"
+                handleSort={this.handleSort} sort_direction={this.state.recent_sort_direction} />
+              <SortableColumn style={num} columnLabel="All Time"
+                handleSort={this.handleSort} sort_direction={this.state.alltime_sort_direction}/>
+            </TableHeader>
+            {rows}
+          </Table>
+        </PagedTable>
       </div>
     );
   };
