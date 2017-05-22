@@ -1,7 +1,7 @@
 import React from 'react';
 import {Pager} from '../Table';
 
-export default class  extends React.Component {
+export default class PagedTable extends React.Component {
   state = {
     current_page_no: 0
   };
