@@ -46,22 +46,22 @@ footer {
 
 
 .img {
-  maxWidth: 32px;
-  marginRight: 10px;
+  max-width: 32px;
+  margin-right: 10px;
 }
 .num_small {
   display: flex;
-  justifyContent: flex-start;
-  flexGrow: 0;
+  justify-content: flex-start;
+  flex-grow: 0;
   width: 2em;
-  marginRight: 20px;
+  margin-right: 20px;
 }
 .textimg {
-  flexGrow: 2;
+  flex-grow: 2;
   overflow: hidden;
-  whiteSpace: nowrap;
-  textOverflow: ellipsis;
-  paddingRight: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 10px;
   width: 180px;
 }
 .num {
