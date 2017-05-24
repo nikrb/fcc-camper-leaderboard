@@ -1,38 +1,73 @@
 import React from 'react';
-import CamperLeaderboard from './components/CamperLeaderboard';
+import './App.css';
 
 export default class App extends React.Component {
   render = () => {
-    const app_header = {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      background: "linear-gradient( 0deg, rgba( 64,64,192,0.8), rgba( 64,64,192,0.5))",
-      padding: "20px",
-      color: "white"
-    };
-    const small_italic = {
-      fontSize: "0.5em",
-      fontStyle: "italic",
-      marginLeft: "1em"
-    };
-    const header1 = {
-      fontSize:"1.5em",
-      fontWeight:"bold"
-    };
     return (
-      <div>
-        <div style={app_header}>
-          <span style={header1}>FreeCodeCamp LeaderBoard</span>
-          <span style={small_italic} >
-            <a href="https://hashnode.com/post/really-responsive-tables-using-css3-flexbox-cijzbxd8n00pwvm53sl4l42cx"
-              target="_blank">
-              really responsive tables
-            </a>
-          </span>
+      <section className="container" >
+        <header>This is a header</header>
+        <div className="wrapper">
+          <div className="table_row table_row_header" >
+            <div>#</div>
+            <div>Name</div>
+          </div>
+          <div className="table_scroll">
+            <div className="table_row">
+              <div>1</div>
+              <div>nik</div>
+            </div>
+            <div className="table_row">
+              <div>1</div>
+              <div>nik</div>
+            </div>
+            <div className="table_row">
+              <div>1</div>
+              <div>nik</div>
+            </div>
+            <div className="table_row">
+              <div>1</div>
+              <div>nik</div>
+            </div>
+            <div className="table_row">
+              <div>1</div>
+              <div>nik</div>
+            </div>
+            <div className="table_row">
+              <div>1</div>
+              <div>nik</div>
+            </div>
+            <div className="table_row">
+              <div>1</div>
+              <div>nik</div>
+            </div>
+            <div className="table_row">
+              <div>1</div>
+              <div>nik</div>
+            </div>
+            <div className="table_row">
+              <div>1</div>
+              <div>nik</div>
+            </div>
+            <div className="table_row">
+              <div>1</div>
+              <div>nik</div>
+            </div>
+            <div className="table_row">
+              <div>1</div>
+              <div>nik</div>
+            </div>
+            <div className="table_row">
+              <div>1</div>
+              <div>nik</div>
+            </div>
+            <div className="table_row">
+              <div>1</div>
+              <div>nik</div>
+            </div>
+          </div>
         </div>
-        <CamperLeaderboard />
-      </div>
+        <footer id="footer" >This is a footer</footer>
+      </section>
     );
   };
 }

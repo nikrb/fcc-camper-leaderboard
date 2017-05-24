@@ -1,6 +1,6 @@
 import React from 'react';
 import {getData} from './FccActions';
-import {Table, TableHeader, SortableColumn, TableStyles as styles} from '../Table';
+import {SortableColumn} from '../Table';
 
 export default class CamperLeaderboard extends React.Component {
   state = {
@@ -48,56 +48,35 @@ export default class CamperLeaderboard extends React.Component {
     });
   };
   render = () => {
-    const img = {
-      maxWidth: "32px",
-      marginRight: "10px"
-    };
-    const num_small = {
-      display: "flex",
-      justifyContent: "flex-start",
-      flexGrow: "0",
-      width: "2em",
-      marginRight: "20px",
-    };
-    const textimg = {
-      display: "flex", /* or align-items doesn't work */
-      alignItems: "center",
-      flexGrow: "2",
-      overflow: "hidden",
-      whiteSpace: "nowrap",
-      textOverflow: "ellipsis",
-      paddingRight: "10px",
-      width: "180px"
-    };
-    const num = {
-      textAlign: "center",
-      width: "80px"
-    };
     const rows = this.state.data.map( ( row, ndx) => {
       return (
-        <div style={styles.table_row} key={ndx}>
-          <div style={num_small}>{row.id}</div>
-          <div style={textimg} title={row.username}>
-            <img style={img} src={row.img} alt="n/a" />
+        <div className="table_row" key={ndx}>
+          <div className="num_small">{row.id}</div>
+          <div className="textimg" title={row.username}>
+            <img className="img" src={row.img} alt="n/a" />
             {row.username}
           </div>
-          <div style={num}>{row.recent}</div>
-          <div style={num}>{row.alltime}</div>
+          <div className="num">{row.recent}</div>
+          <div className="num">{row.alltime}</div>
         </div>
       );
     });
+    // <div columnLabel="Recent"
+    //   handleSort={this.handleSort} sort_direction={this.state.recent_sort_direction} />
+    // <div columnLabel="All Time"
+    //   handleSort={this.handleSort} sort_direction={this.state.alltime_sort_direction}/>
     return (
-      <Table style={{marginTop: "10px"}} >
-        <TableHeader>
-          <div style={num_small}>#</div>
-          <div style={textimg}>User</div>
-          <SortableColumn style={num} columnLabel="Recent"
-            handleSort={this.handleSort} sort_direction={this.state.recent_sort_direction} />
-          <SortableColumn style={num} columnLabel="All Time"
-            handleSort={this.handleSort} sort_direction={this.state.alltime_sort_direction}/>
-        </TableHeader>
-        {rows}
-      </Table>
+      <div className="wrapper">
+        <div className="table_row table_row_header">
+          <div className="num_small">#</div>
+          <div className="textimg">User</div>
+          <div className="num">somenumber</div>
+          <div className="num">somenumber</div>
+        </div>
+        <div className="table_scroll">
+          {rows}
+        </div>
+      </div>
     );
   };
 }

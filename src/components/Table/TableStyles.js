@@ -1,6 +1,8 @@
 export default {
   table : {
-    boxSizing: "border-box",
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
     paddingLeft: "15px",
     paddingRight: "15px",
     marginLeft: "auto",
@@ -11,10 +13,9 @@ export default {
     flexDirection: "row",
     flexGrow: "0",
     flexWrap: "wrap",
-    width: "calc( 100% - 35px)",
     paddingLeft: "15px",
     paddingRight: "15px",
-    borderBottom: "2px solid #e0e0e0",
+    borderBottom: "2px solid #eee",
     borderCollapse: "collapse",
     paddingTop: "5px",
   },

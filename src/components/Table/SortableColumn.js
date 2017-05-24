@@ -20,7 +20,7 @@ export default class SortableColumn extends React.Component {
     if( this.sort_direction === 1) dir_symbol = String.fromCharCode( "9660");
     if( this.sort_direction === -1) dir_symbol = String.fromCharCode( "9650");
     return (
-      <div style={mystyle}
+      <div
         onClick={this.handleClick}>
         {this.props.columnLabel}{dir_symbol}
       </div>
